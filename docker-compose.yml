@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: jagwithyou/book-review-app-fullstack:frontend
+    platform: linux/amd64
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+
+  backend:
+    image: jagwithyou/book-review-app-fullstack:backend
+    platform: linux/amd64
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://DBUSER:DBPASS@DBURI/DBNAME
+      - SECRET_KEY=top-secret
+      - AWS_ACCESS_KEY_ID=access_key
+      - AWS_SECRET_ACCESS_KEY=secret
